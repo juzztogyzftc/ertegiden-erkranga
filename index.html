@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ертегіден экранға — зерттеу жобасы</title>
+<meta name="description" content="Қазақ халық ертегілері мен мультфильм нұсқаларының ұқсастықтары мен айырмашылықтарын зерттеу. «Зерде» республикалық зерттеу жобалары конкурсы.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2316334d'/%3E%3Ctext x='32' y='44' font-size='34' text-anchor='middle' fill='%23e9c46a' font-family='serif' font-weight='bold'%3EЕ%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Мазмұнға өту</a>
+<div class="progress" id="progressBar" aria-hidden="true"></div>
+
+<!-- ============ SVG SPRITE (бейнелеу элементтері) ============ -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="i-ornament" viewBox="0 0 64 64"><path d="M8 32c8-14 16-14 24 0s16 14 24 0" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="32" cy="32" r="3" fill="currentColor"/></symbol>
+  <symbol id="i-book" viewBox="0 0 64 64"><path d="M10 14c10-4 18-4 22 0v36c-4-4-12-4-22 0zM54 14c-10-4-18-4-22 0v36c4-4 12-4 22 0z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M20 24h6M20 32h6M38 24h6M38 32h6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
+  <symbol id="i-compare" viewBox="0 0 64 64"><path d="M22 12L8 32l14 20M42 12l14 20-14 20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M36 18l-8 28" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
+  <symbol id="i-quiz" viewBox="0 0 64 64"><circle cx="32" cy="32" r="22" fill="none" stroke="currentColor" stroke-width="3"/><path d="M24 26c1-5 4-8 8-8s8 3 8 7c0 6-8 6-8 11" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="32" cy="45" r="2.5" fill="currentColor"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 64 64"><circle cx="32" cy="32" r="22" fill="none" stroke="currentColor" stroke-width="3"/><path d="M10 32h44M32 10c-8 8-8 36 0 44c8-8 8-36 0-44z" fill="none" stroke="currentColor" stroke-width="3"/></symbol>
+
+  <!-- Ертегілер таңбашалары -->
+  <symbol id="i-kose" viewBox="0 0 64 64"><path d="M14 30c0-12 8-20 18-20s18 8 18 20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M14 30h36l-4 10H18z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><circle cx="26" cy="25" r="2" fill="currentColor"/><circle cx="38" cy="25" r="2" fill="currentColor"/><path d="M27 34c2 2 8 2 10 0" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
+  <symbol id="i-tostik" viewBox="0 0 64 64"><path d="M10 44c6-2 8-10 16-10s8-8 16-8 10 4 12 8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M14 44h36" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="50" cy="22" r="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="M22 44v6M40 44v6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
+  <symbol id="i-tolagay" viewBox="0 0 64 64"><path d="M6 50L24 20l10 16 8-12 16 26z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><circle cx="48" cy="14" r="6" fill="none" stroke="currentColor" stroke-width="3"/></symbol>
+  <symbol id="i-tazsha" viewBox="0 0 64 64"><path d="M12 14c8-3 14-3 20 0v34c-6-3-12-3-20 0zM52 14c-6-3-12-3-18 0v34c6-3 12-3 18 0z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M32 6l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="currentColor"/></symbol>
+  <symbol id="i-qanbak" viewBox="0 0 64 64"><path d="M20 52c0-14 4-22 12-22s12 8 12 22" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M24 34c-4-2-6-8-2-12 6-6 14-6 18 0" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M48 18v34" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M48 18c6 0 8 4 6 8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
+  <symbol id="i-dombra" viewBox="0 0 64 64"><path d="M22 40c-6 6-6 14 0 18s14 2 18-4c2-4 2-8 0-12z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M36 42L52 14" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M50 10l8-4-2 9" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M26 44l10-16M30 48l10-16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-saka" viewBox="0 0 64 64"><path d="M12 36h40c0 10-8 18-20 18s-20-8-20-18z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M12 36c6 4 34 4 40 0" fill="none" stroke="currentColor" stroke-width="3"/><path d="M32 8l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="currentColor"/></symbol>
+
+  <!-- Ұлттық құндылықтар таңбашалары -->
+  <symbol id="i-yurt" viewBox="0 0 64 64"><path d="M10 40c4-16 12-24 22-24s18 8 22 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M14 40h36M18 40c2-10 6-16 14-16s12 6 14 16M32 16v24M24 22l16 12M40 22L24 34" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M26 52h12v-8H26z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></symbol>
+  <symbol id="i-shapan" viewBox="0 0 64 64"><path d="M22 12l10 8 10-8 10 8-4 12-6-4v26H22V28l-6 4-4-12z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M32 20v8" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
+  <symbol id="i-saddle" viewBox="0 0 64 64"><path d="M14 40c6-10 12-14 18-14s12 4 18 14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M14 40h36" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M22 40v10c0 4 6 4 6 0V40M42 40v8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
+  <symbol id="i-food" viewBox="0 0 64 64"><path d="M10 40h44c0 8-8 14-22 14S10 48 10 40z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><circle cx="24" cy="30" r="3" fill="currentColor"/><circle cx="34" cy="26" r="3" fill="currentColor"/><circle cx="43" cy="31" r="3" fill="currentColor"/></symbol>
+  <symbol id="i-bata" viewBox="0 0 64 64"><path d="M18 44c-6-2-8-8-4-12 3-3 7-2 9 1M46 44c6-2 8-8 4-12-3-3-7-2-9 1" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M32 8v10M18 14l6 7M46 14l-6 7" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M22 50c4 3 16 3 20 0" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
+  <symbol id="i-host" viewBox="0 0 64 64"><path d="M16 34h32v6c0 8-6 14-16 14S16 48 16 42z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M24 26c0-4 4-4 4-8M34 26c0-4 4-4 4-8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M12 56h40" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
+  <symbol id="i-respect" viewBox="0 0 64 64"><circle cx="32" cy="16" r="7" fill="none" stroke="currentColor" stroke-width="3"/><path d="M18 52c0-12 6-18 14-18s14 6 14 18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M32 38v-6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
+  <symbol id="i-naming" viewBox="0 0 64 64"><path d="M10 44c8-6 36-6 44 0" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M14 44l4 10M50 44l-4 10M18 44c2-8 8-12 14-12s12 4 14 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M32 10l2.5 5 5 2.5-5 2.5L32 25l-2.5-5-5-2.5 5-2.5z" fill="currentColor"/></symbol>
+  <symbol id="i-kui" viewBox="0 0 64 64"><path d="M24 46c-5 4-5 10 0 13s12 1 15-4c2-3 2-6 0-9z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M36 44l10-22" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M52 12v14c-3-2-7-1-8 2s1 6 4 6 5-2 5-5V12z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></symbol>
+</svg>
+
+<!-- ============ НАВИГАЦИЯ ============ -->
+<header class="site-header" id="siteHeader">
+  <nav class="nav container" aria-label="Негізгі мәзір">
+    <a href="#home" class="brand">
+      <svg class="brand-mark" aria-hidden="true"><use href="#i-ornament"/></svg>
+      <span>Ертегіден <em>экранға</em></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Мәзірді ашу">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="#home">Басты бет</a></li>
+      <li><a href="#about">Жоба туралы</a></li>
+      <li><a href="#stories">Ертегілер</a></li>
+      <li><a href="#compare">Салыстыру</a></li>
+      <li><a href="#culture">Ұлттық құндылықтар</a></li>
+      <li><a href="#results">Нәтижелер</a></li>
+      <li><a href="#quiz" class="nav-quiz">Викторина</a></li>
+      <li><a href="#sources">Дереккөздер</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
+
+<!-- ============ БАСТЫ БЕТ ============ -->
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <p class="hero-kicker">«Зерде» республикалық зерттеу жобалары конкурсы · Қазақ тілі мен әдебиеті</p>
+      <h1>Ертегіден <span class="hero-accent">экранға</span></h1>
+      <p class="hero-sub">Қазақ халық ертегілері мен мультфильм әлеміне саяхат</p>
+      <p class="hero-intro">Халық ертегілері — ұлттың рухани мұрасы. Ал мультфильмдер сол мұраны жаңа ұрпаққа жеткізудің қызықты жолы. Бұл зерттеу жұмысында жеті қазақ ертегісінің түпнұсқасы мен мультфильм нұсқалары салыстырылып, олардың мазмұны, ұлттық құндылықтары және тәрбиелік мәні қарастырылады.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#stories">Ертегілерді зерттеу</a>
+        <a class="btn btn-outline" href="#quiz">Викторинаны бастау</a>
+      </div>
+      <ul class="hero-chips" aria-label="Зерттелген ертегілер">
+        <li><a href="#stories" data-story-link="aldar">«Алдар көсе»</a></li>
+        <li><a href="#stories" data-story-link="tostik">«Ер Төстік»</a></li>
+        <li><a href="#stories" data-story-link="tolagay">«Толағай»</a></li>
+        <li><a href="#stories" data-story-link="tazsha">«Тазша бала»</a></li>
+        <li><a href="#stories" data-story-link="qanbak">«Қаңбақ шал»</a></li>
+        <li><a href="#stories" data-story-link="aqsaq">«Ақсақ құлан»</a></li>
+        <li><a href="#stories" data-story-link="altyn">«Алтын сақа»</a></li>
+      </ul>
+    </div>
+    <div class="hero-art-wrap" aria-hidden="true">
+      <svg class="hero-art" viewBox="0 0 560 440" role="img" aria-label="Ашық кітаптан көтерілетін киноэкран иллюстрациясы">
+        <defs>
+          <linearGradient id="scr" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#1d4e6b"/><stop offset="1" stop-color="#10273a"/>
+          </linearGradient>
+          <linearGradient id="pge" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#fffdf6"/><stop offset="1" stop-color="#f3e8d2"/>
+          </linearGradient>
+        </defs>
+        <circle cx="280" cy="230" r="200" fill="none" stroke="#d9b45c" stroke-width="1.5" stroke-dasharray="3 7" opacity="0.7"/>
+        <circle cx="280" cy="230" r="168" fill="#fbf5e8" opacity="0.55"/>
+        <!-- экран -->
+        <rect x="196" y="26" width="168" height="100" rx="14" fill="url(#scr)" stroke="#c9a23f" stroke-width="3"/>
+        <path d="M212 112l26-34 16 20 12-14 22 28z" fill="#e9c46a" opacity="0.9"/>
+        <path d="M292 112c2-12 10-18 18-18s16 6 18 18" fill="none" stroke="#f6ecd4" stroke-width="3" stroke-linecap="round"/>
+        <path d="M298 112v-8h24v8" fill="none" stroke="#f6ecd4" stroke-width="3" stroke-linejoin="round"/>
+        <circle cx="330" cy="50" r="9" fill="#f0d488"/>
+        <!-- пленка -->
+        <g fill="#16334d">
+          <rect x="272" y="126" width="16" height="120" rx="4"/>
+          <g fill="#f7f0e1">
+            <circle cx="276" cy="138" r="2.2"/><circle cx="284" cy="138" r="2.2"/>
+            <circle cx="276" cy="154" r="2.2"/><circle cx="284" cy="154" r="2.2"/>
+            <circle cx="276" cy="170" r="2.2"/><circle cx="284" cy="170" r="2.2"/>
+            <circle cx="276" cy="186" r="2.2"/><circle cx="284" cy="186" r="2.2"/>
+            <circle cx="276" cy="202" r="2.2"/><circle cx="284" cy="202" r="2.2"/>
+            <circle cx="276" cy="218" r="2.2"/><circle cx="284" cy="218" r="2.2"/>
+          </g>
+        </g>
+        <!-- кітап -->
+        <path d="M120 306c40-20 100-24 160-6v108c-60-18-120-14-160 6z" fill="url(#pge)" stroke="#c9a23f" stroke-width="3" stroke-linejoin="round"/>
+        <path d="M440 306c-40-20-100-24-160-6v108c60-18 120-14 160 6z" fill="url(#pge)" stroke="#c9a23f" stroke-width="3" stroke-linejoin="round"/>
+        <path d="M280 300v108" stroke="#a9832f" stroke-width="4"/>
+        <path d="M142 332c34-13 82-17 122-5M142 356c34-13 82-17 122-5M142 380c34-13 82-17 122-5" stroke="#d8c69a" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M418 332c-34-13-82-17-122-5M418 356c-34-13-82-17-122-5M418 380c-34-13-82-17-122-5" stroke="#d8c69a" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <!-- безендірулер -->
+        <path d="M96 140l4 9 9 4-9 4-4 9-4-9-9-4 9-4z" fill="#c9a23f"/>
+        <path d="M470 110l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="#7d2231"/>
+        <path d="M84 250c10-18 26-18 36 0" fill="none" stroke="#7d2231" stroke-width="3" stroke-linecap="round"/>
+        <path d="M440 250c10-18 26-18 36 0" fill="none" stroke="#c9a23f" stroke-width="3" stroke-linecap="round"/>
+        <g stroke="#16334d" stroke-width="3" stroke-linecap="round" fill="none">
+          <path d="M474 300c8-14 8-26 0-36"/><path d="M486 306c12-20 12-38 0-52"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ НЕ ТАБАСЫЗ ============ -->
+<section class="discover container" aria-label="Сайт мазмұны">
+  <h2 class="visually-hidden">Бұл сайтта не бар?</h2>
+  <div class="discover-grid">
+    <article class="discover-card">
+      <svg class="discover-icon" aria-hidden="true"><use href="#i-book"/></svg>
+      <h3>Жеті ертегі талдауы</h3>
+      <p>Әр ертегі үшін қысқаша мазмұн, мультфильммен салыстыру, ұлттық құндылықтар және тәрбиелік мәні.</p>
+    </article>
+    <article class="discover-card">
+      <svg class="discover-icon" aria-hidden="true"><use href="#i-compare"/></svg>
+      <h3>Салыстырмалы кестелер</h3>
+      <p>Ертегінің түпнұсқасы мен мультфильм нұсқасы бес критерий бойынша жан-жақты салыстырылған.</p>
+    </article>
+    <article class="discover-card">
+      <svg class="discover-icon" aria-hidden="true"><use href="#i-quiz"/></svg>
+      <h3>«Ертегіні таны» викторинасы</h3>
+      <p>Он екі сұрақтан тұратын интерактивті викторина — білімді сынап, жаңа деректерді есте сақтауға көмектеседі.</p>
+    </article>
+    <article class="discover-card">
+      <svg class="discover-icon" aria-hidden="true"><use href="#i-globe"/></svg>
+      <h3>Ұлттық құндылықтар</h3>
+      <p>Ертегілер мен мультфильмдерден табылған мәдени белгілердің галереясы мен мағынасы.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ============ ЖОБА ТУРАЛЫ ============ -->
+<section class="section" id="about">
+  <div class="container">
+    <header class="section-head">
+      <p class="kicker">Зерттеу жобасы</p>
+      <h2>Жоба туралы</h2>
+      <p class="section-lead">Бұл жоба қазақ халық ертегілерінің экранға көшуінің нәтижесін — не сақталғанын, не өзгергенін — зерттейді.</p>
+    </header>
+    <div class="about-grid">
+      <aside class="author-card">
+        <div class="author-badge" aria-hidden="true">М</div>
+        <h3>Жобаның авторы</h3>
+        <p class="author-name">Нұрғалиұлы Мұхамед</p>
+        <ul class="author-meta">
+          <li>6-сынып оқушысы</li>
+          <li>«Зерде» республикалық зерттеу жобалары конкурсы</li>
+          <li>Секция: «Қазақ тілі мен әдебиеті»</li>
+        </ul>
+        <svg class="author-ornament" aria-hidden="true"><use href="#i-ornament"/></svg>
+      </aside>
+      <div class="about-content">
+        <article class="about-block">
+          <h3><span class="about-num">01</span> Зерттеудің мақсаты</h3>
+          <p>Қазақ халық ертегілерінің мультфильм нұсқаларымен қаншалықты сәйкес келетінін анықтау, сюжеттегі өзгерістерді, кейіпкерлер бейнесін, ұлттық құндылықтарды және тәрбиелік идеяларды салыстыру.</p>
+        </article>
+        <article class="about-block">
+          <h3><span class="about-num">02</span> Зерттеудің міндеттері</h3>
+          <ol class="task-list">
+            <li>Таңдалған жеті ертегінің мәтіндерін оқу.</li>
+            <li>Ертегілердің мультфильм нұсқаларын қарастыру.</li>
+            <li>Сюжеттер мен кейіпкерлерді салыстыру.</li>
+            <li>Ұлттық мәдени элементтерді анықтау.</li>
+            <li>Тәрбиелік мәнін талдау.</li>
+            <li>Оқушылардың пікірлері мен сауалнама нәтижелерін қарастыру.</li>
+          </ol>
+        </article>
+        <article class="about-block">
+          <h3><span class="about-num">03</span> Зерттеудің өзектілігі</h3>
+          <p>Қазіргі балалар халық ертегілерін кітаптан ғана емес, мультфильмдер арқылы да танып біледі. Сондықтан экрандық нұсқалардың ұлттық мұраны, халықтық дүниетанымды және ертегілердің тәрбиелік мәнін қалай жеткізетінін зерттеу маңызды.</p>
+        </article>
+        <article class="about-block">
+          <h3><span class="about-num">04</span> Зерттеу әдістері</h3>
+          <ul class="tag-list">
+            <li>Мәтіндік талдау</li>
+            <li>Салыстырмалы талдау</li>
+            <li>Мультфильмдерді бақылау</li>
+            <li>Ұлттық элементтерді анықтау</li>
+            <li>Сауалнама нәтижелерін талдау</li>
+          </ul>
+        </article>
+        <article class="about-block">
+          <h3><span class="about-num">05</span> Практикалық маңызы</h3>
+          <p>Зерттеу материалдарын қазақ тілі мен әдебиеті сабақтарында, сыныптан тыс іс-шараларда және кітапханаларда пайдалануға болады.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ЕРТЕГІЛЕР КІТАПХАНАСЫ ============ -->
+<section class="section section-tinted" id="stories">
+  <div class="container">
+    <header class="section-head">
+      <p class="kicker">Ертегілер кітапханасы</p>
+      <h2>Жеті ертегі — жеті әлем</h2>
+      <p class="section-lead">Әр карточканы ашып, ертегінің қысқаша мазмұны мен мультфильм нұсқасы туралы талдауды оқи аласыз.</p>
+    </header>
+    <div class="story-tools">
+      <label class="search-box" for="storySearch">
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="search" id="storySearch" placeholder="Ертегі атынан іздеу…" autocomplete="off">
+      </label>
+      <p class="story-count" id="storyCount" aria-live="polite"></p>
+    </div>
+    <div class="story-grid" id="storyGrid"></div>
+    <p class="no-results" id="noResults" hidden>Ештеңе табылмады. Басқа сөзбен іздеп көріңіз.</p>
+  </div>
+</section>
+
+<!-- ============ САЛЫСТЫРУ ============ -->
+<section class="section" id="compare">
+  <div class="container">
+    <header class="section-head">
+      <p class="kicker">Ертегі мен мультфильмді салыстыру</p>
+      <h2>Түпнұсқа мен экрандық нұсқа</h2>
+      <p class="section-lead">Бес критерий бойынша әр ертегі жеке салыстырылған: сюжет, кейіпкерлер бейнесі, ұлттық құндылықтар, тұрмыстық бөлшектер және тәрбиелік мәні.</p>
+      <p class="section-note">Ескерту: байқаулар әр ертегі бойынша жүргізілген бақылауға сүйенеді. Мультфильм нұсқасының атауы мен жылы нақтыланған соң қосымша көрсетіледі.</p>
+      <button class="btn btn-ghost" id="printBtn" type="button">Кестені басып шығару</button>
+    </header>
+    <div class="compare-general">
+      <article class="compare-box compare-similar">
+        <h3>Ұқсастықтары</h3>
+        <ul>
+          <li>Негізгі оқиға желісі көбіне сақталады.</li>
+          <li>Кейіпкерлердің басты қасиеттері танылады.</li>
+          <li>Ертегілердің тәрбиелік идеясы жеткізіледі.</li>
+          <li>Ұлттық мәдениеттің көріністері беріледі.</li>
+        </ul>
+      </article>
+      <article class="compare-box compare-different">
+        <h3>Айырмашылықтары</h3>
+        <ul>
+          <li>Ұзақ сипаттамалар мен қайталанатын сынақтар қысқаруы мүмкін.</li>
+          <li>Кейбір оқиғалар көрнекі қимыл арқылы беріледі.</li>
+          <li>Күлкілі немесе әсерлі көріністер қосылуы мүмкін.</li>
+          <li>Көрерменнің назарын сақтау үшін баяндау қарқыны өзгереді.</li>
+        </ul>
+      </article>
+    </div>
+    <p class="section-note">Төмендегі кестедегі байқаулар әр оқиғаға байланысты берілген. Әр мультфильмде барлық айырмашылық бірдей кездесе бермейді.</p>
+    <div class="compare-list" id="compareList"></div>
+  </div>
+</section>
+
+<!-- ============ ҰЛТТЫҚ ҚҰНДЫЛЫҚТАР ============ -->
+<section class="section section-tinted" id="culture">
+  <div class="container">
+    <header class="section-head">
+      <p class="kicker">Ұлттық құндылықтар</p>
+      <h2>Ертегідегі мәдени код</h2>
+      <p class="section-lead">Халық ертегілері — тек қызықты оқиғалар ғана емес, ұлттық жадтың сақтаушысы. Зерттеу барысында анықталған мәдени белгілердің мағынасымен танысыңыз.</p>
+    </header>
+    <div class="culture-grid" id="cultureGrid"></div>
+  </div>
+</section>
+
+<!-- ============ ЗЕРТТЕУ НӘТИЖЕЛЕРІ ============ -->
+<section class="section" id="results">
+  <div class="container">
+    <header class="section-head">
+      <p class="kicker">Зерттеу нәтижелері</p>
+      <h2>Негізгі қорытындылар</h2>
+    </header>
+    <div class="findings-grid">
+      <article class="finding-card"><span class="finding-num">1</span><p>Мультфильмдер ертегілердің негізгі ойын және тәрбиелік мәнін көбіне сақтайды.</p></article>
+      <article class="finding-card"><span class="finding-num">2</span><p>Кейбір ұзақ сипаттамалар мен қайталанатын оқиғалар қысқартылады.</p></article>
+      <article class="finding-card"><span class="finding-num">3</span><p>Көрнекі әрекеттер балаларға оқиғаны оңай қабылдауға көмектеседі.</p></article>
+      <article class="finding-card"><span class="finding-num">4</span><p>Ұлттық тұрмыс пен дәстүр элементтері мультфильмдерде көрнекі түрде беріледі.</p></article>
+      <article class="finding-card"><span class="finding-num">5</span><p>Кітап оқырманның қиялын дамытуға мүмкіндік береді, ал мультфильм оқиғаны бейне мен қозғалыс арқылы көрсетеді.</p></article>
+    </div>
+    <div class="versus">
+      <h3>Кітап пен мультфильм: әрқайсысының күші</h3>
+      <div class="versus-grid">
+        <article class="versus-col versus-book">
+          <h4>Кітаптың күші</h4>
+          <ul>
+            <li>Оқырманның қиялын дамытады.</li>
+            <li>Тіл байлығын, сөздік қорын байытады.</li>
+            <li>Өз қарқынымен оқуға мүмкіндік береді.</li>
+            <li>Егжей-тегжейлі сипаттама ұсынады.</li>
+          </ul>
+        </article>
+        <article class="versus-col versus-toon">
+          <h4>Мультфильмнің күші</h4>
+          <ul>
+            <li>Оқиғаны бейне мен қозғалыс арқылы көрсетеді.</li>
+            <li>Көрнекі әрекеттер оқиғаны оңай қабылдатады.</li>
+            <li>Көрерменнің назарын ұстап тұрады.</li>
+            <li>Эмоцияны күшейтіп, әсерлі көріністер береді.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+    <div class="survey-placeholder" role="note">
+      <h3>Оқушылар сауалнамасы</h3>
+      <p>Сауалнама нәтижелері орны: жоба аясында мектеп оқушылары арасында сауалнама жүргізілген. Нақты сандық деректер (қатысушылар саны, пайыздық көрсеткіштер) осы жерге <strong>жоба авторының өзі толтырады</strong>. Деректер расталған соң нәтижелер ыңғайлы диаграммалармен көрсетілетін болады.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ВИКТОРИНА ============ -->
+<section class="section section-quiz" id="quiz">
+  <div class="container">
+    <header class="section-head">
+      <p class="kicker">Интерактивті тапсырма</p>
+      <h2>«Ертегіні таны» викторинасы</h2>
+      <p class="section-lead">Он екі сұрақ. Әр жауаптан кейін қысқаша түсіндірме беріледі. Сұрақтың дұрыс жауабы таңдалғаннан кейін ғана ашылады.</p>
+    </header>
+    <div class="quiz-shell" id="quizBox"></div>
+  </div>
+</section>
+
+<!-- ============ ПРАКТИКАЛЫҚ МАТЕРИАЛДАР ============ -->
+<section class="section" id="materials">
+  <div class="container">
+    <header class="section-head">
+      <p class="kicker">Практикалық материалдар</p>
+      <h2>Зерттеуді іс-тәжірибеде қолдану</h2>
+    </header>
+    <div class="materials-grid">
+      <article class="material-card"><h3>Қазақ тілі мен әдебиеті сабақтары</h3><p>Ертегілерді оқу, мазмұнын айту, кейіпкерлерді талдау тапсырмаларына салыстырмалы материал ретінде пайдалануға болады.</p></article>
+      <article class="material-card"><h3>Сыныптан тыс іс-шаралар</h3><p>«Ертегіні таны» викторинасы әдебиет кештері мен викторина сағаттарына дайын интерактивті нұсқа бола алады.</p></article>
+      <article class="material-card"><h3>Мектеп кітапханасы</h3><p>Ертегілер мен олардың экрандық нұсқалары туралы шолар кітапхананың танымдық сағаттарында ұсынылуге болады.</p></article>
+      <article class="material-card"><h3>Салыстыру тапсырмалары</h3><p>Бес критерий бойынша салыстыру кестесі оқушыларға өздерінің салыстырмалы талдау жасауына негіз болады.</p></article>
+      <article class="material-card"><h3>«Ертегіні таны» викторинасы</h3><p>Сайттағы викторина тікелей электронды тапсырма ретінде қолданылады: компьютер, планшет немесе телефон арқылы өтуге болады.</p></article>
+    </div>
+    <p class="section-note">Электрондық жинақ (буклет): автор дайын файлды ұсынған жағдайда осы жерден көруге немесе жүктеп алуға болады. Қазірге файл ұсынылмаған.</p>
+  </div>
+</section>
+
+<!-- ============ ДЕРЕККӨЗДЕР ============ -->
+<section class="section section-tinted" id="sources">
+  <div class="container">
+    <header class="section-head">
+      <p class="kicker">Пайдаланылған дереккөздер</p>
+      <h2>Дереккөздер</h2>
+      <p class="section-lead">Тек расталған, тексерілген сілтемелер берілген. Қалған позициялар автор толтыруы үшін айқын белгіленген.</p>
+    </header>
+    <div class="sources-grid">
+      <article class="source-card">
+        <h3>Ертегілер мәтіндері</h3>
+        <ul class="source-list">
+          <li><a href="https://adebiportal.kz/kz/balaqai/view/er-tostik__59" target="_blank" rel="noopener noreferrer">Adebiportal.kz — «Ер Төстік» ертегісінің толық мәтіні</a></li>
+          <li><a href="https://kitap.kz/books/genre/ertegiler" target="_blank" rel="noopener noreferrer">Kitap.kz — электрондық кітапханадағы ертегілер каталогы</a></li>
+          <li><a href="https://www.abay-cbs.kz/kaz/davai_znak/" target="_blank" rel="noopener noreferrer">Абай атындағы қалалық балалар кітапханасы — «Жазда оқимыз» тізімі</a></li>
+          <li class="source-placeholder">«Алдар көсе», «Толағай», «Тазша бала», «Қаңбақ шал», «Ақсақ құлан», «Алтын сақа» мәтіндеріне сілтемелерді автор қосады (пайдаланылған басылым немесе хрестоматия көрсетіледі).</li>
+        </ul>
+      </article>
+      <article class="source-card">
+        <h3>Мультфильмдер</h3>
+        <ul class="source-list">
+          <li class="source-placeholder">Әр ертегінің мультфильм нұсқасына дәл сілтеме (ресми немесе заңды канал) автор растаған соң осында қосылады. Қазірге сілтемелер тексерілмеген.</li>
+        </ul>
+      </article>
+      <article class="source-card">
+        <h3>Фольклор мен ұлттық мәдениет</h3>
+        <ul class="source-list">
+          <li class="source-placeholder">Қазақ фольклоры мен ұлттық дәстүрлер туралы ғылыми-әдістемелік әдебиеттерге сілтемелер автор толтырады.</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ КЕРІ БАЙЛАНЫС ============ -->
+<section class="section" id="contact">
+  <div class="container">
+    <header class="section-head">
+      <p class="kicker">Кері байланыс</p>
+      <h2>Пікір қалдыру</h2>
+    </header>
+    <div class="contact-placeholder" role="note">
+      <p>Автордың байланыс деректері (электрондық пошта немесе басқа байланыс тәсілі) осы жерге қосылады. Ақпарат әзірше көрсетілмеген.</p>
+      <p class="contact-note">Форма құрылмаған: хабарламаны нақты жіберу үшін сервер қажет. Байланыс деректері расталған соң осы бөлім толық жұмыс істейтін болады.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ ФУТЕР ============ -->
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <p class="footer-title">Ертегіден экранға</p>
+      <p>Зерттеу жобасының авторы: Нұрғалиұлы Мұхамед</p>
+      <p>«Зерде» зерттеу жобасы · Қазақ тілі мен әдебиеті</p>
+    </div>
+    <nav class="footer-nav" aria-label="Футер мәзірі">
+      <a href="#home">Басты бет</a>
+      <a href="#about">Жоба туралы</a>
+      <a href="#stories">Ертегілер</a>
+      <a href="#compare">Салыстыру</a>
+      <a href="#culture">Ұлттық құндылықтар</a>
+      <a href="#results">Нәтижелер</a>
+      <a href="#quiz">Викторина</a>
+      <a href="#sources">Дереккөздер</a>
+    </nav>
+  </div>
+  <div class="container footer-bottom">
+    <p>© 2026 «Ертегіден экранға» зерттеу жобасы. Барлық құқықтар сақталған.</p>
+    <svg class="footer-ornament" aria-hidden="true"><use href="#i-ornament"/></svg>
+  </div>
+</footer>
+
+<!-- ============ МОДАЛДЫҚ ТЕРЕЗЕ ============ -->
+<div class="modal" id="storyModal" aria-hidden="true">
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" data-close aria-label="Терезені жабу">×</button>
+    <div class="modal-head">
+      <svg class="modal-icon" aria-hidden="true"><use id="modalUse" href="#i-book"/></svg>
+      <h3 id="modalTitle"></h3>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<button class="to-top" id="toTop" aria-label="Жоғарыға оралу" hidden>↑</button>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
